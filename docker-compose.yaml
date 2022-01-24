@@ -1,9 +1,0 @@
-services:
-  build:
-    image: ubuntu:latest
-    volumes:
-      - ./container:/container
-    command: /container/run.sh
-
-volumes:
-  container:
