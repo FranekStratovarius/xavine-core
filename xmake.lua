@@ -8,5 +8,7 @@ target("xavine")
 	add_includedirs("include")
 	set_warnings("all", "error")
 	--set_optimize("fastest")
-	--add_syslinks("dl","glfw")
+	if is_plat("linux") then
+		add_syslinks("dl")
+	end
 	add_packages("glfw")
