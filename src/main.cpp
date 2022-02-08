@@ -1,6 +1,7 @@
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
+#include "imgui_impl_opengl3_loader.h"
 #include <stdio.h>
 #include <GLFW/glfw3.h> // Will drag system OpenGL headers
 
@@ -56,7 +57,7 @@ int main(int, char**){
 
 	// Our state
 	bool show_demo_window = false;
-	int frames = 120;
+	const int frames = 120;
 	float frametimes[frames];
 	double lasttime = glfwGetTime();
 
