@@ -32,9 +32,12 @@ int main(int, char**){
 	//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);			// 3.0+ only
 #endif
 
+	//glfwWindowHint(GLFW_REFRESH_RATE,144);
 	// Create window with graphics context
-	const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-	GLFWwindow* window = glfwCreateWindow(mode->width, mode->height, "Dear ImGui GLFW+OpenGL3 example", glfwGetPrimaryMonitor(), NULL);
+	GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+	const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+	//GLFWwindow* window = glfwCreateWindow(mode->width,mode->height,"xavine",NULL,NULL);
+	GLFWwindow* window = glfwCreateWindow(mode->width,mode->height,"xavine",monitor,NULL);
 	if (window == NULL)
 		return 1;
 	glfwMakeContextCurrent(window);
@@ -68,6 +71,7 @@ int main(int, char**){
 		}
 		double newtime = glfwGetTime();
 		frametimes[frames-1] = (float)newtime-lasttime;
+		fprintf(stdout,"frametime: %f\n",newtime-lasttime);
 		lasttime = newtime;
 		glfwPollEvents();
 
