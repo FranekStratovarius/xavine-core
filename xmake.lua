@@ -7,6 +7,7 @@ target("xavine")
 	add_files("src/*.cpp")
 	add_includedirs("include")
 	--third party libs
+	add_files("third-party/src/gl.c")
 	add_files("third-party/src/imgui/*.cpp")
 	add_includedirs("third-party/include")
 
