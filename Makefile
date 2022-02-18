@@ -1,4 +1,4 @@
-all: windows linux
+all: linux #windows
 
 windows:
 	xmake f -p windows -a x86_64 -m debug

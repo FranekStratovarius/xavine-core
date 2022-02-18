@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "window.hpp"
 #include "linmath.h"
-#include "my_imgui.h"
+#include "my_imgui.hpp"
 
 static const struct
 {
@@ -37,6 +37,13 @@ static const char* fragment_shader_text =
 
 static void glfw_error_callback(int error, const char* description){
 	fprintf(stderr, "Glfw Error %d: %s\n", error, description);
+}
+
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods){
+	Window* my_window = (Window*)glfwGetWindowUserPointer(window);
+	if(my_window){
+		my_window->my_key_callback(glfwGetKeyName(key,scancode),action);
+	}
 }
 
 Window::Window(bool fullscreen){
@@ -75,6 +82,11 @@ Window::Window(bool fullscreen){
 	if(window == NULL){
 		throw "could not create GLFW window";
 	}
+
+	glfwSetWindowUserPointer(window,this);
+
+	glfwSetKeyCallback(window,key_callback);
+
 	glfwMakeContextCurrent(window);
 	gladLoadGL(glfwGetProcAddress);
 	glfwSwapInterval(1); // Enable vsync
@@ -109,11 +121,18 @@ Window::Window(bool fullscreen){
 
 	frametimes = new float[frames];
 	lasttime = glfwGetTime();
+
+	luastate = load_lua();
+	if(!luastate){
+		throw "luastate not initialized";
+	}
 }
 
 Window::~Window(){
 	delete show_demo_window;
 	delete[] frametimes;
+
+	close_lua(luastate);
 
 	cleanup_my_imgui();
 
@@ -162,4 +181,10 @@ bool Window::closed(){
 
 void Window::poll_events(){
 	glfwPollEvents();
+
+	run_lua(luastate);
+}
+
+void Window::my_key_callback(const char* key,int action){
+	lua_key_pressed(luastate,key,action);
 }
