@@ -72,7 +72,7 @@ void close_lua(lua_State* luastate){
 }
 
 void run_lua(lua_State* luastate){
-	lua_getglobal(luastate,"main");
+	lua_getglobal(luastate,"update");
 	//only call the function if nil is not returned
 	if(lua_isnil(luastate,-1)==0){
 		lua_call(luastate,0,0);

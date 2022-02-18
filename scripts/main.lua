@@ -1,6 +1,6 @@
 print("luatest")
 
-function main()
+function update()
 end
 
 function key_pressed(key)
