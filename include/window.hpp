@@ -11,4 +11,8 @@ class Window{
 		GLFWwindow* window;
 		GLuint vertex_buffer, vertex_shader, fragment_shader, program;
 		GLint mvp_location, vpos_location, vcol_location;
+		bool* show_demo_window = new bool(false);
+		const int frames = 120;
+		float* frametimes;
+		double lasttime;
 };

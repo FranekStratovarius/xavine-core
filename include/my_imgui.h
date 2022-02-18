@@ -12,4 +12,18 @@ initialize dear imgui
 */
 void setup_my_imgui(const char* glsl_version, GLFWwindow* window);
 
+/*
+
+render imgui
+
+*/
+void render_my_imgui(float* frametimes, int frames, bool* show_demo_window);
+
+/*
+
+clean up
+
+*/
+void cleanup_my_imgui();
+
 #endif

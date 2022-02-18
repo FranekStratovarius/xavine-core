@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "window.hpp"
 #include "linmath.h"
-//#include "my_imgui.h"
+#include "my_imgui.h"
 
 static const struct
 {
@@ -101,19 +101,34 @@ Window::Window(bool fullscreen){
 	vcol_location = glGetAttribLocation(program, "vCol");
 
 	glEnableVertexAttribArray(vpos_location);
-	glVertexAttribPointer(vpos_location, 2, GL_FLOAT, GL_FALSE,
-						  sizeof(vertices[0]), (void*) 0);
+	glVertexAttribPointer(vpos_location, 2, GL_FLOAT, GL_FALSE, sizeof(vertices[0]), (void*) 0);
 	glEnableVertexAttribArray(vcol_location);
-	glVertexAttribPointer(vcol_location, 3, GL_FLOAT, GL_FALSE,
-						  sizeof(vertices[0]), (void*) (sizeof(float) * 2));
+	glVertexAttribPointer(vcol_location, 3, GL_FLOAT, GL_FALSE, sizeof(vertices[0]), (void*) (sizeof(float) * 2));
+	
+	setup_my_imgui(glsl_version,window);
+
+	frametimes = new float[frames];
+	lasttime = glfwGetTime();
 }
 
 Window::~Window(){
+	delete show_demo_window;
+	delete[] frametimes;
+
+	cleanup_my_imgui();
+
 	glfwDestroyWindow(window);
 	glfwTerminate();
 }
 
 void Window::render(){
+	for(int i=0;i<frames-1;i++){
+			frametimes[i]=frametimes[i+1];
+	}
+	double newtime = glfwGetTime();
+	frametimes[frames-1] = (float)newtime-lasttime;
+	lasttime = newtime;
+
 	float ratio;
 	int width, height;
 	mat4x4 m, p, mvp;
@@ -121,6 +136,7 @@ void Window::render(){
 	glfwGetFramebufferSize(window, &width, &height);
 	ratio = width / (float) height;
 
+	//clear screen
 	glViewport(0, 0, width, height);
 	glClear(GL_COLOR_BUFFER_BIT);
 
@@ -131,8 +147,12 @@ void Window::render(){
 
 	glUseProgram(program);
 	glUniformMatrix4fv(mvp_location, 1, GL_FALSE, (const GLfloat*) mvp);
+	//draw on screen
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 
+	render_my_imgui(frametimes, frames, show_demo_window);
+
+	//show screen
 	glfwSwapBuffers(window);
 }
 
