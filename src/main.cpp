@@ -13,8 +13,13 @@ int main(int, char**){
 		return 1;
 	}
 
+	if(window==nullptr){
+		fprintf(stderr,"no window");
+	}
+
 	//main loop
-	while (!window->closed()){
+	while(!window->closed()){
+		window->poll_events();
 		window->render();
 	}
 

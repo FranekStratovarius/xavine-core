@@ -1,5 +1,5 @@
 add_rules("mode.debug", "mode.release")
-add_requires("glfw")
+add_requires("glfw 3.3.5","imgui v1.85")
 
 target("xavine")
 	set_kind("binary")
@@ -18,4 +18,4 @@ target("xavine")
 	if is_plat("linux") then
 		add_syslinks("dl")
 	end
-	add_packages("glfw")
+	add_packages("glfw","imgui")
