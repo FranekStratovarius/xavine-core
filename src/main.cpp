@@ -6,7 +6,7 @@ int main(int, char**){
 	//create window
 	Window* window;
 	try{
-		window = new Window(true);
+		window = new Window(false);
 	}catch(const char* message){
 		fprintf(stderr,message);
 		return 1;

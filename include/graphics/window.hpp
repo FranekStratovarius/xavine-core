@@ -15,7 +15,7 @@ class Window{
 		GLFWwindow* window;
 		lua_State* luastate;
 
-		unsigned int VBO, VAO;
+		unsigned int VBO, VAO, EBO, texture;
 		Shader* shader;
 
 		bool* show_demo_window = new bool(false);
