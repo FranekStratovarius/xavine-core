@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "window.hpp"
+#include "graphics/window.hpp"
 
 int main(int, char**){
 

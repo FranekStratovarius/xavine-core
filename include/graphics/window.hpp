@@ -1,6 +1,7 @@
 #include <glad/gl.h>
 #include <GLFW/glfw3.h> // Will drag system OpenGL headers
-#include "lua.hpp"
+#include "scripting/lua.hpp"
+#include "graphics/shader.hpp"
 
 class Window{
 	public:
@@ -14,8 +15,8 @@ class Window{
 		GLFWwindow* window;
 		lua_State* luastate;
 
-		GLuint vertex_buffer, vertex_shader, fragment_shader, program;
-		GLint mvp_location, vpos_location, vcol_location;
+		unsigned int VBO, VAO;
+		Shader* shader;
 
 		bool* show_demo_window = new bool(false);
 		const int frames = 120;

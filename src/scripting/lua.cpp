@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "lua.hpp"
+#include "scripting/lua.hpp"
 
 void printvalue(lua_State* luastate,int idx){
 	if(lua_isnil(luastate,idx))
