@@ -55,7 +55,7 @@ lua_State* load_lua(){
 	//wenn man sie nicht braucht kann man das auch weglassen
 	luaL_openlibs(luastate);
 	//luafile laden
-	int result=luaL_loadfile(luastate,"main.lua");
+	int result=luaL_loadfile(luastate,"assets/scripts/main.lua");
 	if(result==LUA_OK){
 		//falls ok geladen luafile ausführen
 		lua_pcall(luastate,0,LUA_MULTRET,0);

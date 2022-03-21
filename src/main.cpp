@@ -6,10 +6,9 @@ int main(int, char**){
 	//create window
 	Window* window;
 	try{
-		window = new Window(false);
+		window = new Window(true);
 	}catch(const char* message){
 		fprintf(stderr,message);
-		delete window;
 		return 1;
 	}
 

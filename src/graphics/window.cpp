@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "graphics/window.hpp"
+#include "graphics/texture.hpp"
 #include "linmath.h"
 #include "graphics/my_imgui.hpp"
 
@@ -60,7 +61,7 @@ Window::Window(bool fullscreen){
 	gladLoadGL(glfwGetProcAddress);
 	glfwSwapInterval(1); // Enable vsync
 
-	shader = new Shader("vertex.glsl", "fragment.glsl");
+	shader = new Shader("assets/shader/vertex.glsl", "assets/shader/fragment.glsl");
 
 	float vertices[] = {
 		// positions         // colors
