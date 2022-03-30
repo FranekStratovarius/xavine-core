@@ -111,6 +111,8 @@ Window::Window(bool fullscreen){
 	setup_my_imgui(glsl_version,window);
 
 	frametimes = new float[frames];
+	frametimes[0] = 0;
+	frametimes[1] = 1.f/30.0f;
 	lasttime = glfwGetTime();
 
 	luastate = load_lua();
@@ -136,7 +138,7 @@ Window::~Window(){
 }
 
 void Window::render(){
-	for(int i=0;i<frames-1;i++){
+	for(int i=2;i<frames-1;i++){
 			frametimes[i]=frametimes[i+1];
 	}
 	double newtime = glfwGetTime();
