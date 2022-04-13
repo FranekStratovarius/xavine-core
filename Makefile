@@ -2,7 +2,7 @@ all: linux #windows
 release: linux-release #windows-release
 debug: linux-debug #windows-debug
 
-linux: linux-debug linux-release
+linux: linux-debug# linux-release
 windows: windows-debug windows-release
 
 windows-debug:
@@ -16,7 +16,7 @@ windows-release:
 	rsync --recursive --progress --delete --update assets/ ./build/windows/x86_64/release/assets
 
 linux-debug:
-	xmake f -p linux -a x86_64 -m debug
+	xmake f -p linux -a x86_64 -m debug  --debugger=cgdb
 	xmake
 	rsync --recursive --progress --delete --update assets/ ./build/linux/x86_64/debug/assets/
 
