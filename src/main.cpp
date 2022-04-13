@@ -48,10 +48,14 @@ int main(int, char**){
 	sprites[0] = sprite1;
 	sprites[1] = sprite2;
 
+	float x = 0.0f;
+
 	//main loop
 	while(!window->closed()){
 		window->poll_events();
 		window->render(sprites, 2);
+		sprite1->set_position(glm::vec2(x, 50.0f));
+		x+=0.1f;
 	}
 
 	delete window;

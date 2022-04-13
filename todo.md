@@ -4,7 +4,7 @@
 	- [ ] lua eingebaut
 	- [ ] lua-funktonen aufrufen
 - [ ] tasteneingaben/controllereingaben
-- [ ] bilder laden
+- [x] bilder laden
 - [ ] basic input-output gameloop with lua scripting
 - [ ] file i/o
 - [ ] networking (epic online services)
